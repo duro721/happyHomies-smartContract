@@ -41,12 +41,30 @@ This will map the address of someone who minted so you can set a maxium of mints
 mapping (address => uint256) public _tokensMintedByAddress;
 ````
 
-Used to set the merkleRoot hash for the respective minting functions: (see [merkleTree](https://github.com/duro721/happyHomies-smartContract#merkletree))
+Used to set the merkleRoot hash for the respective minting functions:
 ```
     bytes32 public presaleMerkleRoot;
     bytes32 public contestMerkleRoot;
 ```
-  
+
+### The Minting Functions
+
+This one is really easy, it is the public mint function below a flow of what it does:
+1. It checks if you are not minting more than allowed (maxMint)
+2. It checks if you are sending the correct amount of ETH
+3. It checks if you are not minting more than the maximum supply (MAX_SUPPLY)
+4. At the end it calls the _safeMint function and mints the quantity set through the frontend mintpage
+
+```
+    function mintToken(uint256 quantity) external payable onlySaleActive nonReentrant() {
+        require(quantity <= maxMint, "You can not mint more than alowed");
+        require(price * quantity == msg.value, "Wrong amout of ETH sent");
+        require(totalSupply() + quantity <= MAX_SUPPLY, "Can not mint more than max supply");
+
+           _safeMint( msg.sender, quantity);
+    } 
+```
+
 #### Some extra points of interest  
 - I used Modifiers to do a check pre mint on mint functions to check if sale is active
 - We had 3 minting functions, 1 public and 2 presales. I would now investigate possibilities to have 1 presale mint function check how many a wallet is allowed to mint.
