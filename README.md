@@ -26,7 +26,7 @@ mapping (address => uint256) public _tokensMintedByAddress;
 - Withdraw funds on the end of the contract is outdated and you should look into payment splitter
 
 ## merkleTree
-In this directory you will finde the javascript to generate a merkleTree hash based on a list of Ethereum wallet addresses in .json. you can run it with node generateMerkleTree.js
+In this directory you will finde the javascript to generate a merkleTree hash based on a list of Ethereum wallet addresses in .json. you can run it with ```node generateMerkleTree.js```
 
 ## Scripts
 Within this directory you will find 2 scripts, 1 is to run the contract localy and the other is to deploy the contract. I use Hardhat to work on my projects, please visit their site to find out more. [Hardhat](https://hardhat.org/)  
