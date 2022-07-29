@@ -31,4 +31,4 @@ In this directory you will finde the javascript to generate a merkleTree hash ba
 Within this directory you will find 2 scripts, 1 is to run the contract localy and the other is to deploy the contract. I use Hardhat to work on my projects, please visit their site to find out more. [Hardhat](https://hardhat.org/)  
 
 ## Test
-In this directory you will find the test file i used to test the contract and find out how much gas my minting functions would cost, i used Hardhat gas Reporter plugin for this and an API key to Coinmarketcap to get the correct Ethereum to USD price.
+In this directory you will find the test file i used to test the contract and find out how much gas my minting functions would cost, i used Hardhat gas Reporter plugin for this and an API key to Coinmarketcap to get the correct Ethereum to USD price. Within the Hardhat config file you can set the ammount of accounts (wallets) used in testing. Its set to 6 at the moment but i also did testing with 8000, just to see how it performs with that many requests.
