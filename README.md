@@ -16,7 +16,7 @@ Below some numbers, a maxium supply, price for a NFT and 3 settings for a maximu
     uint256 public maxPresaleMint = 1; 
     uint256 public maxContestMint = 2;
 ```
-*Only 1 of them can't be changed after contract is deployed, and that is MAX_SUPPLY  *
+_Only 1 of them can't be changed after contract is deployed, and that is MAX_SUPPLY_
   
 Two function to set a sale active, sale (for public) and presale for Whitelist mint:  
 ```
