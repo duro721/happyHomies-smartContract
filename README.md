@@ -19,7 +19,7 @@ This will map the address of someone who minted so you can set a maxium of mints
 mapping (address => uint256) public _tokensMintedByAddress;
 ````
   
-### Some extra points of interest  
+#### Some extra points of interest  
 - I used Modifiers to do a check pre mint on mint functions to check if sale is active
 - We had 3 minting functions, 1 public and 2 presales. I would now investigate possibilities to have 1 presale mint function check how many a wallet is allowed to mint.
 - Put some time into investigating Provenance Hash back then, not many people seemed to care in the end. But its still a good idea to show the legitimacy of your Art and store that hash in your contract. [Provenance Hash]([https://pages.github.com/](https://medium.com/coinmonks/the-elegance-of-the-nft-provenance-hash-solution-823b39f99473)
