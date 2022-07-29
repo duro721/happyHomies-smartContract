@@ -17,4 +17,5 @@ mapping (address => uint256) public _tokensMintedByAddress;
   
 ### Some extra points of interest  
 - I used Modifiers to do a check pre mint on mint functions to check if sale is active
+- We had 3 minting functions, 1 public and 2 presales. I would now investigate possibilities to have 1 presale mint function check how many a wallet is allowed to mint.
 - Withdraw funds on the end of the contract is outdated and you should look into payment splitter
