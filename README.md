@@ -49,7 +49,7 @@ Used to set the merkleRoot hash for the respective minting functions:
 
 ### The Minting Functions
 
-This one is really easy, it is the public mint function below a flow of what it does:
+#### Public Mint
 The function requires a quantity set when using it and its payable meaning it accepts ETH, it also checks the modifier to see if sale is active and it sets nonReentrant which safegaurds against a contract minting. In newer versions of ERC721A the _safeMint version is already safegaurded against contract minting, so you no longer need it. After the initial function check it will go through the requirements.
 1. It checks if you are not minting more than allowed (maxMint)
 2. It checks if you are sending the correct amount of ETH
@@ -67,7 +67,42 @@ At the end it calls the _safeMint function and mints the quantity set through th
     } 
 ```
 
-#### Some extra points of interest  
+#### Presale Minting
+This function was used for our Whitelist presale for wallets that acquired 1 mint, besides the quantity you also have to hand over proof that the wallet your using is on the whitelist (MmrkleTree). And it checks the modifer to see if presale is active. Afther this it will go through the following requirements.
+1. It checks the merkleProof you provide through the frontend when you click mint
+2. It checks if your sending the correct ammount of ETH
+3. It checks if how many you already minted and it has to be lower than the maximum of 1
+4. It checks if you are not minting more than the maxium supply (MAX_SUPPLY)
+
+It will then mint the NFT and it will map the quantity to your address, so if you try to mint again check 3 will fail and you can not mint more.
+
+```
+    function mintPresale(uint256 quantity, bytes32[] calldata proof) external payable onlyPresaleActive nonReentrant() {
+        require(MerkleProof.verify(proof, presaleMerkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address is not on Presale Allow List");
+        require(price * quantity == msg.value, "Wrong amout of ETH sent");
+        require(_tokensMintedByAddress[msg.sender] + quantity == maxPresaleMint, "Can only mint 1 token during PreSale");
+        require(totalSupply() + quantity < MAX_SUPPLY, "Can not mint more than max supply");
+
+        _tokensMintedByAddress[msg.sender] += quantity;
+         _safeMint(msg.sender, quantity);
+    }
+```
+
+#### Presale Contest Minting
+This function is basically the same as the one above except that you can mint 2 tokens instead of 1, like mentioned before this feels outdated and i'm sure there are better ways out there to merge this into 1 minting function. But back in the day this is how i got it to work :).
+```
+    function mintContest(uint256 quantity, bytes32[] calldata proof) external payable onlyPresaleActive nonReentrant() {
+        require(MerkleProof.verify(proof, contestMerkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address is not on Contest Allow List");
+        require(price * quantity == msg.value, "Wrong amout of ETH sent");
+        require(_tokensMintedByAddress[msg.sender] + quantity <= maxContestMint, "Can only mint 2 tokens during PreSale");
+        require(totalSupply() + quantity < MAX_SUPPLY, "Can not mint more than max supply");
+
+        _tokensMintedByAddress[msg.sender] += quantity;
+         _safeMint(msg.sender, quantity);
+    }
+```
+
+### Some extra points of interest  
 - I used Modifiers to do a check pre mint on mint functions to check if sale is active
 - We had 3 minting functions, 1 public and 2 presales. I would now investigate possibilities to have 1 presale mint function check how many a wallet is allowed to mint.
 - Put some time into investigating Provenance Hash back then, not many people seemed to care in the end. But its still a good idea to show the legitimacy of your Art and store that hash in your contract. [Provenance Hash](https://medium.com/coinmonks/the-elegance-of-the-nft-provenance-hash-solution-823b39f99473)
