@@ -50,10 +50,12 @@ Used to set the merkleRoot hash for the respective minting functions:
 ### The Minting Functions
 
 This one is really easy, it is the public mint function below a flow of what it does:
+The function checks the modifier to see if sale is active and sets it nonReentrant which safegaurds against a contract abusing the function. In newer versions of ERC721A the _safeMint version is already safegaurded against contract minting, so you no longer need it. After the initial function check it will go through the requirements.
 1. It checks if you are not minting more than allowed (maxMint)
 2. It checks if you are sending the correct amount of ETH
 3. It checks if you are not minting more than the maximum supply (MAX_SUPPLY)
-4. At the end it calls the _safeMint function and mints the quantity set through the frontend mintpage
+  
+At the end it calls the _safeMint function and mints the quantity set through the frontend mintpage
 
 ```
     function mintToken(uint256 quantity) external payable onlySaleActive nonReentrant() {
