@@ -1,5 +1,6 @@
 # Happy Homies smartContract
 This repository will hold the smartContract i created for the Happy Homies NFT project that launched in march on the Ethereum Blockchain, it uses ERC721A. I am sharing this through Github so you can fork the repo and start playing around with building your own smartContract. Let me start of by saying i could never have reached this level if it was not for the NFT Community, i spend a lot of hours learning from others here are some links that helped me out:  
+  
 [Buildspace](https://buildspace.so)  
 [Chance Gas Efficiancy](https://nftchance.medium.com/the-gas-efficient-way-of-building-and-launching-an-erc721-nft-project-for-2022-b3b1dac5f2e1)  
 [LlammaWEB3 discord](https://discord.gg/mMSKjHHh3u)  
