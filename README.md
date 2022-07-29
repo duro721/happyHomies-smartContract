@@ -23,3 +23,12 @@ mapping (address => uint256) public _tokensMintedByAddress;
 - We had 3 minting functions, 1 public and 2 presales. I would now investigate possibilities to have 1 presale mint function check how many a wallet is allowed to mint.
 - Put some time into investigating Provenance Hash back then, not many people seemed to care in the end. But its still a good idea to show the legitimacy of your Art and store that hash in your contract. [Provenance Hash]([https://pages.github.com/](https://medium.com/coinmonks/the-elegance-of-the-nft-provenance-hash-solution-823b39f99473)
 - Withdraw funds on the end of the contract is outdated and you should look into payment splitter
+
+## merkleTree
+In this directory you will finde the javascript to generate a merkleTree hash based on a list of Ethereum wallet addresses in .json. you can run it with node generateMerkleTree.js
+
+## Scripts
+Within this directory you will find 2 scripts, 1 is to run the contract localy and the other is to deploy the contract. I use Hardhat to work on my projects, please visit their site to find out more. [Hardhat](https://hardhat.org/)  
+
+## Test
+In this directory you will find the test file i used to test the contract and find out how much gas my minting functions would cost, i used Hardhat gas Reporter plugin for this and an API key to Coinmarketcap to get the correct Ethereum to USD price.
