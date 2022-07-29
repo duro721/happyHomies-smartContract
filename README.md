@@ -89,7 +89,7 @@ It will then mint the NFT and it will map the quantity to your address, so if yo
 ```
 
 #### Presale Contest Minting
-This function is basically the same as the one above except that you can mint 2 tokens instead of 1, like mentioned before this feels outdated and i'm sure there are better ways out there to merge this into 1 minting function. But back in the day this is how i got it to work :).
+This function is basically the same as the one above except that you can mint 2 tokens instead of 1, this feels outdated and i'm sure there are better ways out there to merge this into 1 minting function. But back in the day this is how i got it to work :).
 ```
     function mintContest(uint256 quantity, bytes32[] calldata proof) external payable onlyPresaleActive nonReentrant() {
         require(MerkleProof.verify(proof, contestMerkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address is not on Contest Allow List");
