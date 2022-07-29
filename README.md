@@ -4,10 +4,10 @@ This repository will hold the smartContract i created for the Happy Homies NFT p
 ## The smartContract
 In the main directory you will finde happyHomies.sol, this is the smartContract used during the launch of Happy Homies. I will go over a few functions below and explain what they do so you can use it to create your own smartContract.  
   
-This function can be written to set one of the two sales active, default is false when you deploy the contract:
+For Happy Homies we used 2 Allowlists in order to reward people with 1 or 2 mints, with MerkleTree implementation we had a gas efficient way of adding big lists:
 ```
-    bool public saleActive;
-    bool public presaleActive;
+    bytes32 public presaleMerkleRoot;
+    bytes32 public contestMerkleRoot;
 ```
   
 This will map the address of someone who minted so you can set a maxium of mints per wallet:
