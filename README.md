@@ -16,7 +16,7 @@ Below some numbers, a maxium supply, price for a NFT and 3 settings for a maximu
     uint256 public maxPresaleMint = 1; 
     uint256 public maxContestMint = 2;
 ```
-Only 1 of them can't be changed after contract is deployed, and that is MAX_SUPPLY  
+*Only 1 of them can't be changed after contract is deployed, and that is MAX_SUPPLY  *
   
 Two function to set a sale active, sale (for public) and presale for Whitelist mint:  
 ```
@@ -29,11 +29,19 @@ For Happy Homies we used 2 Allowlists in order to reward people with 1 or 2 mint
     bytes32 public presaleMerkleRoot;
     bytes32 public contestMerkleRoot;
 ```
+
+One is the baseURI for setting the IPFS hash that leads to the metadata (ifps:/hsx2134hasd/) the other to set the Provenance hash:
+```
+    string public _baseTokenURI;
+    string public homiesProvenance;
+```
   
 This will map the address of someone who minted so you can set a maxium of mints per wallet:
 ```
 mapping (address => uint256) public _tokensMintedByAddress;
 ````
+
+Used to set the merkleRoot hash for the respective minting
   
 #### Some extra points of interest  
 - I used Modifiers to do a check pre mint on mint functions to check if sale is active
