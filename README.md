@@ -8,6 +8,22 @@ This repository will hold the smartContract i created for the Happy Homies NFT p
 ## The smartContract
 In the main directory you will finde happyHomies.sol, this is the smartContract used during the launch of Happy Homies. I will go over a few functions below and explain what they do so you can use it to create your own smartContract.  
   
+Below some numbers, a maxium supply, price for a NFT and 3 settings for a maximum mint for their respective minting functons:  
+```
+    uint256 constant MAX_SUPPLY = 10000;
+    uint256 public price = 0.06 ether;
+    uint256 public maxMint = 2; 
+    uint256 public maxPresaleMint = 1; 
+    uint256 public maxContestMint = 2;
+```
+Only 1 of them can't be changed after contract is deployed, and that is MAX_SUPPLY  
+  
+Two function to set a sale active, sale (for public) and presale for Whitelist mint:  
+```
+    bool public saleActive;
+    bool public presaleActive;
+```
+  
 For Happy Homies we used 2 Allowlists in order to reward people with 1 or 2 mints, with MerkleTree implementation we had a gas efficient way of adding big lists:
 ```
     bytes32 public presaleMerkleRoot;
